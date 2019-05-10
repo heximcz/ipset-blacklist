@@ -1,0 +1,6 @@
+/.idea/
+/ipset-blacklist.iml
+/src/Config/__pycache__/
+/src/Exceptions/__pycache__/
+/src/IpSet/__pycache__/
+/src/Parser/__pycache__/
