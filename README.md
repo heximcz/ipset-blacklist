@@ -1,6 +1,7 @@
 # Dynamically generated ipset from public sources
 
 
+
 ## How to install
 ```
 pip3 install urllib3
@@ -79,3 +80,12 @@ ipset:
 ipset-temp: tempxlist
 verbose: False
 ```
+
+## Run script
+```
+python3 /opt/ipset-blacklist/blacklists.py 
+```
+Running the script is safe. First, the temp ipset is created, and it is swapped into the original ipset when process is done.
+ 
+Amazing and as always, Enjoy!
+
