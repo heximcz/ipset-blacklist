@@ -4,6 +4,7 @@
 #     <a unique name of category>:
 #         ipset-name: <the ipset name>
 #         list: [<array of a url addresses>]
+#         file: <path to the file with ip addresses (your own list) - value is optional>
 #     .
 #     .
 #     .
@@ -21,6 +22,7 @@ ipset:
             - "http://lists.blocklist.de/lists/all.txt"
             - "http://danger.rulez.sk/projects/bruteforceblocker/blist.php"
             - "https://www.turris.cz/greylist-data/greylist-latest.csv"
+        file: "/opt/my-blacklist.txt"
 
     # allow only specific port
     blacklist-port:
@@ -28,6 +30,7 @@ ipset:
         list:
             - "http://www.ipdeny.com/ipblocks/data/countries/cn.zone"
             - "http://www.ipdeny.com/ipblocks/data/countries/tr.zone"
+        file:
 
     # allow all
     whitelist:
@@ -35,6 +38,7 @@ ipset:
         list:
             - "http://www.ipdeny.com/ipblocks/data/countries/cz.zone"
             - "http://www.ipdeny.com/ipblocks/data/countries/sk.zone"
+        file:
 
 # name of temp ipset
 ipset-temp: tempxlist

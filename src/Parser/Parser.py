@@ -26,6 +26,10 @@ class Parser:
                 data = data + self.__extract_ips(http_data)
             except BlacklistException:
                 pass
+        if ipset[name]['file'] is not None:
+            content = self.__get_file(ipset[name]['file'])
+            if content is not None:
+                data = data + self.__extract_ips(content)
         return data
 
     def __load(self, url):
@@ -34,6 +38,16 @@ class Parser:
         if r.status != 200:
             raise BlacklistException
         return r.data.decode('utf-8')
+
+    @staticmethod
+    def __get_file(path):
+        try:
+            with open(path, 'r') as f:
+                content = f.read()
+        except IOError:
+            print('IO error while open file: ' + path)
+            return None
+        return content
 
     @staticmethod
     def __extract_ips(content):
