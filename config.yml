@@ -1,30 +1,43 @@
-# drop all
-blacklist-total:
-    ipset-name: blacklist
-    list:
-        - "http://www.spamhaus.org/drop/drop.txt"
-        - "http://www.spamhaus.org/drop/drop.txt"
-        - "http://www.spamhaus.org/drop/edrop.txt"
-        - "http://lists.blocklist.de/lists/all.txt"
-        - "http://danger.rulez.sk/projects/bruteforceblocker/blist.php"
-        - "https://www.turris.cz/greylist-data/greylist-latest.csv"
+# Usage of config file.
+#
+# ipset:
+#     <a unique name of category>:
+#         ipset-name: <the ipset name>
+#         list: [<array of a url addresses>]
+#     .
+#     .
+#     .
+# ipset-temp: <name of temporary ipset>
+# verbose: <boolean>
 
-# allow only specific port
-blacklist-port:
-    ipset-name: blacklist-port
-    list:
-        - "http://www.ipdeny.com/ipblocks/data/countries/cn.zone"
-        - "http://www.ipdeny.com/ipblocks/data/countries/tr.zone"
+ipset:
+    # drop all
+    blacklist-total:
+        ipset-name: blacklist
+        list:
+            - "http://www.spamhaus.org/drop/drop.txt"
+            - "http://www.spamhaus.org/drop/drop.txt"
+            - "http://www.spamhaus.org/drop/edrop.txt"
+            - "http://lists.blocklist.de/lists/all.txt"
+            - "http://danger.rulez.sk/projects/bruteforceblocker/blist.php"
+            - "https://www.turris.cz/greylist-data/greylist-latest.csv"
 
-# allow all
-whitelist:
-    ipset-name: whitelist
-    list:
-        - "http://www.ipdeny.com/ipblocks/data/countries/cz.zone"
-        - "http://www.ipdeny.com/ipblocks/data/countries/sk.zone"
+    # allow only specific port
+    blacklist-port:
+        ipset-name: blacklist-port
+        list:
+            - "http://www.ipdeny.com/ipblocks/data/countries/cn.zone"
+            - "http://www.ipdeny.com/ipblocks/data/countries/tr.zone"
+
+    # allow all
+    whitelist:
+        ipset-name: whitelist
+        list:
+            - "http://www.ipdeny.com/ipblocks/data/countries/cz.zone"
+            - "http://www.ipdeny.com/ipblocks/data/countries/sk.zone"
 
 # name of temp ipset
-temp_ipset: tempxlist
+ipset-temp: tempxlist
 
 # Verbose output, True or False
 verbose: True

@@ -1,30 +1,35 @@
-import sys
-import os
 import subprocess
 from src.Parser import Parser
 from src.Config import LoadConfig
-from src.Exceptions import *
 
 
 class IpSet:
     """ Create and Flush ipset """
 
-    def __init__(self):
-        self._parser = Parser()
-        try:
-            self._config = LoadConfig()
-        except ConfigException as e:
-            print(e)
-            sys.exit(os.EX_UNAVAILABLE)
+    def __init__(self, config: LoadConfig):
+        """
+        :param config: instanceof LoadConfig
+        """
+        self.__parser = Parser(config)
+        self.__config = config
+        self.__ipset = self.__config.get_ipset()
+        self.verbose = self.__config.env('verbose')
 
     def set_blacklist(self):
         """
-        Create all ipsets from config file
+        Dynamically create all ipsets from the config file
         :return:
         """
-        self.__process('blacklist-total', self._parser.create('blacklist-total'))
-        self.__process('blacklist-port', self._parser.create('blacklist-port'))
-        self.__process('whitelist', self._parser.create('whitelist'))
+
+        for name in self.__ipset:
+            if self.verbose:
+                print("Start create: " + self.__ipset[name]['ipset-name'])
+
+            # create ipset
+            self.__process(name, self.__parser.create(name))
+
+            if self.verbose:
+                print('Done')
 
     def _create(self, name):
         """
@@ -98,17 +103,17 @@ class IpSet:
         :param data: parsed data
         :return:
         """
-        env = self._config.env(name)
+        env = self.__ipset[name]
         # create temp ipset
-        self._create(self._config.env('temp_ipset'))
+        self._create(self.__config.env('ipset-temp'))
         # flush tem ipset
-        self._flush(self._config.env('temp_ipset'))
+        self._flush(self.__config.env('ipset-temp'))
         # create ipset from 'name'
         self._create(env['ipset-name'])
         # append all ip to temp ipset, TODO: Is here any faster method?
         for ip in data:
-            self._add(self._config.env('temp_ipset'), ip)
+            self._add(self.__config.env('ipset-temp'), ip)
         # swap to original
-        self._swap(self._config.env('temp_ipset'), env['ipset-name'])
+        self._swap(self.__config.env('ipset-temp'), env['ipset-name'])
         # destroy temp ipset
-        self._destroy(self._config.env('temp_ipset'))
+        self._destroy(self.__config.env('ipset-temp'))

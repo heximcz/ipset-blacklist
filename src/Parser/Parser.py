@@ -1,5 +1,3 @@
-import os
-import sys
 import re
 import urllib3
 from src.Config import LoadConfig
@@ -9,14 +7,10 @@ from src.Exceptions import *
 class Parser:
     """ Parse URLs input """
 
-    def __init__(self):
+    def __init__(self, config: LoadConfig):
         timeout = urllib3.Timeout(connect=5.0, read=7.0)
         self.__http = urllib3.PoolManager(timeout=timeout)
-        try:
-            self.__config = LoadConfig()
-        except ConfigException as e:
-            print(e)
-            sys.exit(os.EX_UNAVAILABLE)
+        self.__config = config
 
     def create(self, name):
         """
@@ -24,9 +18,9 @@ class Parser:
         :param name:
         :return:
         """
-        env = self.__config.env(name)
+        ipset = self.__config.get_ipset()
         data = []
-        for val in env['list']:
+        for val in ipset[name]['list']:
             try:
                 http_data = self.__load(val)
                 data = data + self.__extract_ips(http_data)
