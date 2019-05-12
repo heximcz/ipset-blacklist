@@ -1,10 +1,13 @@
 # Dynamically generated ipset from public sources
 
+## Requirements
 
+- Python version >=3.6
 
 ## How to install
 ```
 pip3 install urllib3
+pip3 install pyyaml
 cd /opt
 git clone https://github.com/heximcz/ipset-blacklist.git
 cd ./ipset-blacklist
