@@ -8,6 +8,7 @@ pip3 install urllib3
 cd /opt
 git clone https://github.com/heximcz/ipset-blacklist.git
 cd ./ipset-blacklist
+cp ./config-default.yml ./config.yml
 vim ./config.yml
 ```
 
