@@ -11,7 +11,7 @@ class LoadConfig:
         try:
             with open(file_path, 'r') as stream:
                 try:
-                    self.__config = yaml.load(stream)
+                    self.__config = yaml.load(stream, Loader=yaml.SafeLoader)
                     self.__check_ipset()
                 except yaml.YAMLError:
                     raise ConfigException('Configuration Exception: Cannot load the config.yml file!')
