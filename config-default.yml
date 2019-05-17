@@ -3,8 +3,8 @@
 # ipset:
 #     <a unique name of category>:
 #         ipset-name: <the ipset name>
-#         list: [<array of a url addresses>]
-#         file: <path to the file with ip addresses (your own list) - value is optional>
+#         list: [<array of a url with ip addresses>]
+#         file: [<array of path(s) to the file(s) with ip addresses (your own list) - value is optional>]
 #     .
 #     .
 #     .

@@ -46,7 +46,8 @@ ipset:
         ipset-name: blacklist
         list:
             - "http://www.spamhaus.org/drop/drop.txt"
-        file: "/opt/my-blacklist.txt"
+        file: 
+            - "/opt/my-blacklist.txt"
 
 ipset-temp: tempxlist
 verbose: False
@@ -65,7 +66,8 @@ ipset:
             - "http://lists.blocklist.de/lists/all.txt"
             - "http://danger.rulez.sk/projects/bruteforceblocker/blist.php"
             - "https://www.turris.cz/greylist-data/greylist-latest.csv"
-        file: "/opt/my-blacklist.txt"
+        file: 
+            - "/opt/my-blacklist.txt"
 
     blacklist-port:
         ipset-name: blacklist-port
