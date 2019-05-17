@@ -20,16 +20,19 @@ class Parser:
         """
         ipset = self.__config.get_ipset()
         data = []
+        # get url(s) list:
         for val in ipset[name]['list']:
             try:
                 http_data = self.__load(val)
                 data = data + self.__extract_ips(http_data)
             except BlacklistException:
                 pass
+        # get local file(s):
         if ipset[name]['file'] is not None:
-            content = self.__get_file(ipset[name]['file'])
-            if content is not None:
-                data = data + self.__extract_ips(content)
+            for val in ipset[name]['file']:
+                content = self.__get_files(val)
+                if content is not None:
+                    data = data + self.__extract_ips(content)
         return data
 
     def __load(self, url):
@@ -40,7 +43,7 @@ class Parser:
         return r.data.decode('utf-8')
 
     @staticmethod
-    def __get_file(path):
+    def __get_files(path):
         try:
             with open(path, 'r') as f:
                 content = f.read()

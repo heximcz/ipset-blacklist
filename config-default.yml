@@ -22,7 +22,8 @@ ipset:
             - "http://lists.blocklist.de/lists/all.txt"
             - "http://danger.rulez.sk/projects/bruteforceblocker/blist.php"
             - "https://www.turris.cz/greylist-data/greylist-latest.csv"
-        file: "/opt/my-blacklist.txt"
+        file:
+            - "/opt/my-blacklist.txt"
 
     # allow only specific port
     blacklist-port:
