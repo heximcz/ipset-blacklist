@@ -95,7 +95,7 @@ class IpSet:
         :param command:
         :return:
         """
-        subprocess.run(command, shell=True, check=True, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+        subprocess.run(command, shell=True, check=False, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
 
     def __process(self, name, data):
         """
