@@ -40,7 +40,10 @@ ipset:
             - "http://www.ipdeny.com/ipblocks/data/countries/sk.zone"
         file:
 
-    # total whitelist (remove ip from blacklist-total, ipset-name must be same)
+    # total whitelist
+    # Remove ip from any ipset.
+    # Value in ipset-name must be some of the variables listed
+    # !!! In this case do not rename name whitelist-total !!! It is unique name.
     whitelist-total:
         ipset-name: blacklist
         list:
