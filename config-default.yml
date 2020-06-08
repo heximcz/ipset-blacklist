@@ -1,7 +1,7 @@
 # Usage of config file.
 #
 # ipset:
-#     <a unique name of category>:
+#     <a unique name of category>: (will be used as file name)
 #         ipset-name: <the ipset name>
 #         list: [<array of a url with ip addresses>]
 #         file: [<array of path(s) to the file(s) with ip addresses (your own list) - value is optional>]
@@ -12,11 +12,10 @@
 # verbose: <boolean>
 
 ipset:
-    # drop all
+    # drop all (ideal for prerouting)
     blacklist-total:
         ipset-name: blacklist
         list:
-            - "http://www.spamhaus.org/drop/drop.txt"
             - "http://www.spamhaus.org/drop/drop.txt"
             - "http://www.spamhaus.org/drop/edrop.txt"
             - "http://lists.blocklist.de/lists/all.txt"
@@ -41,8 +40,18 @@ ipset:
             - "http://www.ipdeny.com/ipblocks/data/countries/sk.zone"
         file:
 
+    # total whitelist (remove ip from blacklist-total, ipset-name must be same)
+    whitelist-total:
+        ipset-name: blacklist
+        list:
+        file:
+            - "/opt/total-whitelist.txt"
+
 # name of temp ipset
 ipset-temp: tempxlist
 
 # Verbose output, True or False
 verbose: True
+
+# Output folder
+folder: "/opt/"

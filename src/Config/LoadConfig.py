@@ -40,7 +40,7 @@ class LoadConfig:
             for name in ipset:
                 if ipset[name]['ipset-name'] is None:
                     raise ConfigException("Configuration Exception: the 'ipset-name' has no value in: " + name)
-                if ipset[name]['list'] is None:
-                    raise ConfigException("Configuration Exception: the 'list' has no value in: " + name)
+#                if ipset[name]['list'] is None:
+#                    raise ConfigException("Configuration Exception: the 'list' has no value in: " + name)
         else:
             raise ConfigException("Configuration Exception: Config file has no values!")

@@ -53,16 +53,21 @@ class IpSet:
         ]
         self.__run(command)
 
-    def _add(self, name, ip):
+    def _add(self, name, ipset_name, ip):
         """
         add ip to ipset
         :param name
         :param ip
         :return:
         """
-        command = [
-            'ipset -exist add ' + name + ' ' + ip
-        ]
+        if name != 'whitelist-total':
+            command = [
+                'ipset -exist add ' + ipset_name + ' ' + ip
+            ]
+        else:
+            command = [
+                'ipset -exist del ' + ipset_name + ' ' + ip
+            ]
         self.__run(command)
 
     def _swap(self, source, destination):
@@ -112,7 +117,7 @@ class IpSet:
         self._create(env['ipset-name'])
         # append all ip to temp ipset, TODO: Is here any faster method?
         for ip in data:
-            self._add(self.__config.env('ipset-temp'), ip)
+            self._add(name, self.__config.env('ipset-temp'), ip)
         # swap to original
         self._swap(self.__config.env('ipset-temp'), env['ipset-name'])
         # destroy temp ipset

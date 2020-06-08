@@ -21,12 +21,13 @@ class Parser:
         ipset = self.__config.get_ipset()
         data = []
         # get url(s) list:
-        for val in ipset[name]['list']:
-            try:
-                http_data = self.__load(val)
-                data = data + self.__extract_ips(http_data)
-            except BlacklistException:
-                pass
+        if ipset[name]['list'] is not None:
+            for val in ipset[name]['list']:
+                try:
+                    http_data = self.__load(val)
+                    data = data + self.__extract_ips(http_data)
+                except BlacklistException:
+                    pass
         # get local file(s):
         if ipset[name]['file'] is not None:
             for val in ipset[name]['file']:
